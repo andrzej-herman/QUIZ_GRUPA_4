@@ -12,10 +12,20 @@ Frontend.PokazEkranPowitalny();
 backend.WylosujPytanieZAktualnejKategorii();
 
 // WYŚWIETLANIE AKTUALNEGO PYTANIA  i pobranie odpowiedzi gracza (int => 1, 2, 3 lub 4)
-var odpowiedzGracza = Frontend.WyswietlPytanie(backend.AktualnePytanie);
+var odpowiedzGracza = Frontend.WyswietlPytanieIPobierzOdpowiedz(backend.AktualnePytanie);
 
 // WALIDACJA ODPOWIEDZI GRACZA
+var czyOdpowiedzPrawidlowa = backend.SprawdzPoprawnoscOdpowiedzi(odpowiedzGracza);
 
+if (czyOdpowiedzPrawidlowa)
+{
+
+    Frontend.OdpowiedzOk(backend.AktualnaKategoria);
+}
+else
+{
+    Frontend.KoniecGry();
+}
 
 
 
