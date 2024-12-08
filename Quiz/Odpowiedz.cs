@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Quiz
 {
-    public class Odpowiedz
+    public class Odpowiedz : Base
     {
-        public int Id { get; set; }
-        public string Tresc { get; set; }
         public bool CzyPoprawna { get; set; }
     }
 }

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Quiz
 {
-    public class Pytanie : Base
+    public abstract class Base
     {
-        public int Kategoria { get; set; }
-        public List<Odpowiedz> Odpowiedzi { get; set; } 
+        public int Id { get; set; }
+        public string Tresc { get; set; }
     }
 }
