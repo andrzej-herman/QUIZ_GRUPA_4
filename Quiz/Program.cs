@@ -8,30 +8,38 @@ var backend = new Backend();
 // WYŚWIETLANIE EKRANU POWITALNEGO
 Frontend.PokazEkranPowitalny();
 
-// LOSOWANIE PYTANIA Z AKTUALNEJ KATEGORII
-backend.WylosujPytanieZAktualnejKategorii();
-
-// WYŚWIETLANIE AKTUALNEGO PYTANIA  i pobranie odpowiedzi gracza (int => 1, 2, 3 lub 4)
-var odpowiedzGracza = Frontend.WyswietlPytanieIPobierzOdpowiedz(backend.AktualnePytanie);
-
-// WALIDACJA ODPOWIEDZI GRACZA
-var czyOdpowiedzPrawidlowa = backend.SprawdzPoprawnoscOdpowiedzi(odpowiedzGracza);
-
-if (czyOdpowiedzPrawidlowa)
+while (true)
 {
+    // LOSOWANIE PYTANIA Z AKTUALNEJ KATEGORII
+    backend.WylosujPytanieZAktualnejKategorii();
 
-    Frontend.OdpowiedzOk(backend.AktualnaKategoria);
+    // WYŚWIETLANIE AKTUALNEGO PYTANIA  i pobranie odpowiedzi gracza (int => 1, 2, 3 lub 4)
+    var odpowiedzGracza = Frontend.WyswietlPytanieIPobierzOdpowiedz(backend.AktualnePytanie);
+
+    // WALIDACJA ODPOWIEDZI GRACZA
+    var czyOdpowiedzPrawidlowa = backend.SprawdzPoprawnoscOdpowiedzi(odpowiedzGracza);
+
+    if (czyOdpowiedzPrawidlowa)
+    {
+        // SPRAWDZENIE CZY TO BYŁA OSTATNIA KATEGORIA
+        var ostatniePytanie = backend.SprawdzCzyOstatniaKategoria();
+        if (ostatniePytanie)
+        {
+            Frontend.Wygrana();
+            break;
+        }
+        else
+        {
+            Frontend.OdpowiedzOk(backend.AktualnaKategoria);
+            // PODNIESIENIE KATEGORII NA NAJWYŻSZĄ
+            backend.PodniesKategorieNaNastepna();
+        }
+    }
+    else
+    {
+        Frontend.KoniecGry();
+        break;
+    }
 }
-else
-{
-    Frontend.KoniecGry();
-}
-
-
-
-
-
-
-
 
 Console.ReadLine();

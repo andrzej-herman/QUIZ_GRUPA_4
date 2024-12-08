@@ -13,11 +13,19 @@ namespace Quiz
 
         public Backend()
         {
-            AktualnaKategoria = 100;
             StworzListePytan();
+            Kategorie = ListaWszystkichPytan!
+                .Select(p => p.Kategoria)
+                .Distinct()
+                .OrderBy(p => p)
+                .ToList();
+
+            AktualnaKategoria = Kategorie[AktualnyIndex];
             _random = new Random();
         }
 
+        public int AktualnyIndex { get; set; }
+        public List<int> Kategorie { get; set; }
         public List<Pytanie> ListaWszystkichPytan { get; set; }
         public int AktualnaKategoria { get; set; }
         public Pytanie AktualnePytanie { get; set; }
@@ -34,7 +42,7 @@ namespace Quiz
         {
             var pytaniaZaktualnejKategorii = ListaWszystkichPytan.Where(p => p.Kategoria == AktualnaKategoria).ToList();
             var index = _random.Next(0, pytaniaZaktualnejKategorii.Count);
-            var pytanie = ListaWszystkichPytan[index];
+            var pytanie = pytaniaZaktualnejKategorii[index];
             pytanie.Odpowiedzi = pytanie.Odpowiedzi.OrderBy(p => _random.Next()).ToList();
             var id = 1;
             foreach (var odpowiedz in pytanie.Odpowiedzi)
@@ -49,6 +57,18 @@ namespace Quiz
         {
             return AktualnePytanie.Odpowiedzi
                 .FirstOrDefault(o => o.Id == userAnswer)!.CzyPoprawna;       
+        }
+
+        public bool SprawdzCzyOstatniaKategoria()
+        {
+            var najwyzszyIndex = Kategorie.Count - 1;
+            return AktualnyIndex == najwyzszyIndex;         
+        }
+
+        public void PodniesKategorieNaNastepna()
+        {
+            AktualnyIndex++;
+            AktualnaKategoria = Kategorie[AktualnyIndex];
         }
     }
 }

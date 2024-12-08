@@ -90,5 +90,16 @@ namespace Quiz
             Console.ReadLine();
         }
 
+        public static void Wygrana()
+        {
+            Console.Clear();
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(" Brawo,  to było ostatnie pytanie !!!");
+            Console.WriteLine($" Wygrałaś/eś QUIZ !!!");
+            Console.WriteLine();
+            Console.ReadLine();
+        }
+
     }
 }
