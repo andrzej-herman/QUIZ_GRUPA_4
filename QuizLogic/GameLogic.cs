@@ -5,13 +5,13 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace Quiz
+namespace QuizLogic
 {
-    public class Backend
+    public class GameLogic
     {
         Random _random;
 
-        public Backend()
+        public GameLogic()
         {
             StworzListePytan();
             Kategorie = ListaWszystkichPytan!

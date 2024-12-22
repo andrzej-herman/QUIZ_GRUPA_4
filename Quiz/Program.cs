@@ -1,12 +1,13 @@
 ﻿using Quiz;
+using QuizLogic;
 
 
-var backend = new Backend();
+var backend = new GameLogic();
 // STWORZENIE LISTY WSZYSTKICH PYTAŃ => ZROBILIŚMY W KONSTUKTORZE KLASY BACKEND
 // USTAWIENIE KATEGORII NA NAJNIŻSZĄ => ZROBILIŚMY W KONSTUKTORZE KLASY BACKEND
 
 // WYŚWIETLANIE EKRANU POWITALNEGO
-Frontend.PokazEkranPowitalny();
+Display.PokazEkranPowitalny();
 
 while (true)
 {
@@ -14,7 +15,7 @@ while (true)
     backend.WylosujPytanieZAktualnejKategorii();
 
     // WYŚWIETLANIE AKTUALNEGO PYTANIA  i pobranie odpowiedzi gracza (int => 1, 2, 3 lub 4)
-    var odpowiedzGracza = Frontend.WyswietlPytanieIPobierzOdpowiedz(backend.AktualnePytanie);
+    var odpowiedzGracza = Display.WyswietlPytanieIPobierzOdpowiedz(backend.AktualnePytanie);
 
     // WALIDACJA ODPOWIEDZI GRACZA
     var czyOdpowiedzPrawidlowa = backend.SprawdzPoprawnoscOdpowiedzi(odpowiedzGracza);
@@ -25,19 +26,19 @@ while (true)
         var ostatniePytanie = backend.SprawdzCzyOstatniaKategoria();
         if (ostatniePytanie)
         {
-            Frontend.Wygrana();
+            Display.Wygrana();
             break;
         }
         else
         {
-            Frontend.OdpowiedzOk(backend.AktualnaKategoria);
+            Display.OdpowiedzOk(backend.AktualnaKategoria);
             // PODNIESIENIE KATEGORII NA NAJWYŻSZĄ
             backend.PodniesKategorieNaNastepna();
         }
     }
     else
     {
-        Frontend.KoniecGry();
+        Display.KoniecGry();
         break;
     }
 }

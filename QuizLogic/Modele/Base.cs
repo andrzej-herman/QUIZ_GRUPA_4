@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Quiz
+namespace QuizLogic
 {
-    public class Odpowiedz : Base
+    public abstract class Base
     {
-        public bool CzyPoprawna { get; set; }
+        public int Id { get; set; }
+        public string Tresc { get; set; }
     }
 }
